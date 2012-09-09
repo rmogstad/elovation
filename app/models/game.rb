@@ -1,6 +1,7 @@
 class Game < ActiveRecord::Base
   has_many :ratings, :dependent => :destroy
   has_many :results, :dependent => :destroy
+  has_many :challenges, :dependent => :destroy
 
   RATER_MAPPINGS = {
     "elo" => Rater::EloRater.new,
@@ -47,7 +48,8 @@ class Game < ActiveRecord::Base
     {
       :name => name,
       :ratings => top_ratings.map(&:as_json),
-      :results => recent_results.map(&:as_json)
+      :results => recent_results.map(&:as_json),
+      :challenges => active_challenges.map(&:as_json)
     }
   end
 
@@ -74,5 +76,8 @@ class Game < ActiveRecord::Base
     results.order("id ASC").all.each do |result|
       rater.update_ratings self, result.teams.order("rank ASC")
     end
+
+  def active_challenges
+    challenges.active.sort_by(&:expires_at)
   end
 end

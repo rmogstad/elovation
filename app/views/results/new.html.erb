@@ -10,6 +10,11 @@
   <% end %>
 
   <p>
+  <span class="acts-on-player"><strong>Defeats</strong></span>
+
+  <%= f.select :loser_id, player_options, {:include_blank => 'Select a Player'} %>
+
+  <span class="inline-submit">
     <%= f.submit :class => "btn btn-primary" %>
   </p>
 <% end %>

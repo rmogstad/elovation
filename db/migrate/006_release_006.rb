@@ -14,6 +14,13 @@ class Release006 < ActiveRecord::Migration
     create_table :teams do |t|
       t.integer :rank
       t.references :result
+  
+  def change
+    create_table :challenges do |t|
+      t.integer :challenger_id
+      t.integer :challengee_id
+      t.integer :game_id
+      t.integer :result_id
 
       t.timestamps
     end
@@ -62,5 +69,10 @@ class Release006 < ActiveRecord::Migration
       t.float :trueskill_mean
       t.float :trueskill_deviation
     end
+    
+    add_index :challenges, :challenger_id
+    add_index :challenges, :challengee_id
+    add_index :challenges, :game_id
+    add_index :challenges, :result_id
   end
 end
