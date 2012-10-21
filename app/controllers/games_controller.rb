@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   include ParamsCleaner
 
   allowed_params :game => [ :name,
+                            :description,
                             :rating_type,
                             :min_number_of_teams,
                             :max_number_of_teams,

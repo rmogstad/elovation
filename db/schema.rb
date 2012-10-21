@@ -35,7 +35,8 @@ ActiveRecord::Schema.define(:version => 7) do
     t.integer  "max_number_of_teams"
     t.integer  "min_number_of_players_per_team"
     t.integer  "max_number_of_players_per_team"
-    t.boolean  "allow_ties"
+    t.boolean  "allow_ties",
+    t.string   "description"
   end
 
   create_table "players", :force => true do |t|

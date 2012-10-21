@@ -8,6 +8,10 @@ class Release007 < ActiveRecord::Migration
         new_value = (rating.trueskill_mean - (3.0 * rating.trueskill_deviation)) * 100
         rating.update_attribute :value, new_value
       end
+      add_column :games, :description, :string
     end
+
+  def down
+    remove_column :games, :description
   end
 end
